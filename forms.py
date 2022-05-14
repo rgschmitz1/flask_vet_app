@@ -1,15 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
-    FileField,
+    DateField,
     FieldList,
     IntegerField,
-    PasswordField,
     SelectField,
     StringField,
     SubmitField,
     ValidationError,
 )
+#from wtforms.fields.html5 import DateField
 from wtforms.validators import (
     DataRequired,
     EqualTo,
@@ -18,35 +18,32 @@ from wtforms.validators import (
 )
 
 
-class LaunchInstanceForm(FlaskForm):
-    """Instance launcher form."""
-    instances = FieldList(
-        SelectField(validators=[Optional()]),
-        min_entries=len(CHOICES["WORKFLOW"]),
-        max_entries=len(CHOICES["WORKFLOW"])
-    )
-    myinstance = StringField(
-        "Instance Type",
+class InsertPet(FlaskForm):
+    name = StringField(
+        "Pet name",
         validators=[DataRequired()]
     )
-    custom_instance = StringField(
-        "Custom Instance",
-        validators=[Optional()]
-    )
-    timeout = IntegerField(
-        "Timeout",
-        default="1",
-        validators=[DataRequired(message="Please enter an integer")]
-    )
-    units = SelectField(
-        "Units",
-        choices=CHOICES["UNITS"],
-        default="hours",
+    birthdate = DateField(
+        "Birth Date",
+        format='%Y-%m-%d',
         validators=[DataRequired()]
     )
-    workflow = SelectField(
-        "Workflow",
-        choices=CHOICES["WORKFLOW"],
+    # species should maybe be a choicefield or a combo of user input and choice?
+    species = StringField(
+        "Species",
         validators=[DataRequired()]
     )
-    submit = SubmitField("Launch Instance")
+    sex = SelectField(
+        "Pet Sex",
+        choices=['M', 'F'],
+        validators=[DataRequired()]
+    )
+    breed = StringField(
+        "Breed",
+        validators=[DataRequired()]
+    )
+    color = StringField(
+        "Color",
+        validators=[DataRequired()]
+    )
+    submit = SubmitField("Save")
