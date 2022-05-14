@@ -2,28 +2,75 @@
 {% block title %}Pet Info{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-center">
-	<form class="card p-3 bg-light" action="/pet" method="POST">
+	<form class="card bg-light col-sm-6 p-3" action="/pet" method="POST">
 		{{ form.hidden_tag() }}{{ form.crsf_token }}
+		<div class="mb-2 row">
+			{{ form.name.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.name(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.name.label }}
-		{{ form.name(class="mb-2") }}
+		<div class="mb-2 row">
+			{{ form.birthdate.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.birthdate(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.birthdate.label }}
-		{{ form.birthdate(class="mb-2") }}
+		<div class="mb-2 row">
+			{{ form.species.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.species(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.species.label }}
-		{{ form.species(class="mb-2") }}
+		<div class="mb-2 row">
+			{{ form.sex.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.sex(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.sex.label }}
-		{{ form.sex(class="mb-2") }}
+		<div class="mb-2 row">
+			{{ form.breed.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.breed(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.breed.label }}
-		{{ form.breed(class="mb-2") }}
+		<div class="mb-2 row">
+			{{ form.color.label(class="col-sm-3 col-form-label") }}
+			<div class="col-sm-9">
+				{{ form.color(class="form-control") }}
+			</div>
+		</div>
 
-		{{ form.color.label }}
-		{{ form.color(class="mb-2") }}
-
-		{{ form.submit(class="btn btn-primary mt-2") }}
+		<div class="d-flex justify-content-center">
+			{{ form.submit(class="btn btn-primary mt-2") }}
+		</div>
 	</form>
 </div>
+<table id="data" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Birthdate</th>
+			<th>Species</th>
+			<th>Sex</th>
+			<th>Breed</th>
+			<th>Color</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 {% endblock %}

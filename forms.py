@@ -20,11 +20,11 @@ from wtforms.validators import (
 
 class InsertPet(FlaskForm):
     name = StringField(
-        "Pet name",
+        "Name",
         validators=[DataRequired()]
     )
     birthdate = DateField(
-        "Birth Date",
+        "Birthdate",
         format='%Y-%m-%d',
         validators=[DataRequired()]
     )
@@ -34,7 +34,7 @@ class InsertPet(FlaskForm):
         validators=[DataRequired()]
     )
     sex = SelectField(
-        "Pet Sex",
+        "Sex",
         choices=['M', 'F'],
         validators=[DataRequired()]
     )
