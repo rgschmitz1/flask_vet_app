@@ -18,7 +18,7 @@ from wtforms.validators import (
 )
 
 
-class InsertPet(FlaskForm):
+class InsertPatient(FlaskForm):
     name = StringField(
         "Name",
         validators=[DataRequired()]

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Pet Info{% endblock %}
+{% block title %}Patient Info{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-center">
-	<form class="card bg-light col-sm-6 p-3" action="/pet" method="POST">
+	<form class="card bg-light col-sm-6 p-3" action="/patient" method="POST">
 		{{ form.hidden_tag() }}{{ form.crsf_token }}
 		<div class="mb-2 row">
 			{{ form.name.label(class="col-sm-3 col-form-label") }}
@@ -27,7 +27,7 @@
 
 		<div class="mb-2 row">
 			{{ form.sex.label(class="col-sm-3 col-form-label") }}
-			<div class="col-sm-9">
+			<div class="col-md-auto">
 				{{ form.sex(class="form-control") }}
 			</div>
 		</div>
@@ -54,6 +54,7 @@
 <table id="data" class="table table-striped">
 	<thead>
 		<tr>
+			<th>ID</th>
 			<th>Name</th>
 			<th>Birthdate</th>
 			<th>Species</th>
@@ -64,6 +65,7 @@
 	</thead>
 	<tbody>
 		<tr>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td></td>
