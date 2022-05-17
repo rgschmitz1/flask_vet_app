@@ -14,7 +14,14 @@
 		<div class="mb-2 row">
 			{{ form.birthdate.label(class="col-sm-3 col-form-label") }}
 			<div class="col-md-auto">
+			{% if form.birthdate.errors %}
+			{{ form.birthdate(class="form-control is-invalid", **{'aria-describedby':"feedbackDate"}) }}
+				<div id="feedbackDate" class="invalid-feedback">
+					Please input a valid birthdate.
+				</div>
+			{% else %}
 				{{ form.birthdate(class="form-control") }}
+			{% endif %}
 			</div>
 		</div>
 

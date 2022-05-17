@@ -1,3 +1,4 @@
+from datetime import date
 from flask_wtf import FlaskForm
 from wtforms import (
     BooleanField,
@@ -17,6 +18,9 @@ from wtforms.validators import (
     Optional,
 )
 
+def date_in_future(form, field):
+    if (field.data>date.today()):
+        raise ValidationError('Date must not be in the future')
 
 class InsertPatient(FlaskForm):
     name = StringField(
@@ -26,7 +30,7 @@ class InsertPatient(FlaskForm):
     birthdate = DateField(
         "Birthdate",
         format='%Y-%m-%d',
-        validators=[DataRequired()]
+        validators=[DataRequired(), date_in_future]
     )
     # species should maybe be a choicefield or a combo of user input and choice?
     species = StringField(
@@ -47,3 +51,4 @@ class InsertPatient(FlaskForm):
         validators=[DataRequired()]
     )
     submit = SubmitField("Save")
+    
