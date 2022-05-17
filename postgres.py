@@ -5,7 +5,7 @@ from os import getenv
 
 load_dotenv()
 
-class postgres:
+class postgres():
     def __init__(self):
         self.__connection = None
         try:
@@ -34,7 +34,7 @@ class postgres:
             return False
 
 
-    def execute_read_query(connection, query):
+    def execute_read_query(self, query):
         cursor = self.__connection.cursor()
         result = None
         try:

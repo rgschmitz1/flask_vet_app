@@ -66,15 +66,17 @@
 			</tr>
 		</thead>
 		<tbody>
+			{% for animal in animals %}
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>{{ animal[0] }}</td>
+				<td>{{ animal[1] }}</td>
+				<td>{{ animal[2] }}</td>
+				<td>{{ animal[3] }}</td>
+				<td>{{ animal[4] }}</td>
+				<td>{{ animal[5] }}</td>
+				<td>{{ animal[6] }}</td>
 			</tr>
+			{% endfor %}
 		</tbody>
 	</table>
 </div>
