@@ -1,18 +1,10 @@
 # Setup
 Code was tested using Python 3.10.4 using Windows 10
 
-Create a virtual environment using the following command from a command line
+Create a virtual environment and install required packages using the following commands
 ```
 python -m venv venv
-```
-
-Activate virtual environment using
-```
 venv\Scripts\activate
-```
-
-Install required packages
-```
 pip install -r requirements.txt
 ```
 
