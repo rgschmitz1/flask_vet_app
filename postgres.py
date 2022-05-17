@@ -1,4 +1,5 @@
 import psycopg2
+import psycopg2.extras
 from psycopg2 import OperationalError
 from dotenv import load_dotenv
 from os import getenv
@@ -35,7 +36,7 @@ class postgres():
 
 
     def execute_read_query(self, query):
-        cursor = self.__connection.cursor()
+        cursor = self.__connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
         result = None
         try:
             cursor.execute(query)

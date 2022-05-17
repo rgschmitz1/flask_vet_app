@@ -68,13 +68,13 @@
 		<tbody>
 			{% for animal in animals %}
 			<tr>
-				<td>{{ animal[0] }}</td>
-				<td>{{ animal[1] }}</td>
-				<td>{{ animal[2] }}</td>
-				<td>{{ animal[3] }}</td>
-				<td>{{ animal[4] }}</td>
-				<td>{{ animal[5] }}</td>
-				<td>{{ animal[6] }}</td>
+				<td>{{ animal['pet_id'] }}</td>
+				<td>{{ animal['pet_name'] }}</td>
+				<td>{{ animal['pet_birthdate'] }}</td>
+				<td>{{ animal['species'] }}</td>
+				<td>{{ animal['pet_sex'] }}</td>
+				<td>{{ animal['breed'] }}</td>
+				<td>{{ animal['color'] }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
