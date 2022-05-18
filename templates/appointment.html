@@ -1,4 +1,41 @@
 {% extends "base.html" %}
 {% block title %}Appointment{% endblock %}
 {% block content %}
+<form action="/appointment" method="POST">
+    <SELECT name="vet">
+        {% for v in vets %}
+            <OPTION value={{v.vet_id}}>{{v.vet_name}}</option type="submit">
+        {% endfor %}
+        <input type="submit" value="Select Veterinarian">
+    </select>
+</form>
+
+<div class="card bg-light p-3">
+	<table id="data" class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Birthdate</th>
+				<th>Species</th>
+				<th>Sex</th>
+				<th>Weight</th>
+				<th>Notes</th>
+				<th>Appointment Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for appt in appointments %}
+			<tr>
+				<td>{{ appt['pet_name'] }}</td>
+				<td>{{ appt['pet_birthdate']}}</td>
+				<td>{{ appt['species'] }}</td>
+				<td>{{ appt['pet_sex'] }}</td>
+				<td>{{ appt['weight']}}</td>
+				<td>{{ appt['notes']}}</td>
+				<td>{{ appt['appointment_date'] }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}
