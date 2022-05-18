@@ -5,16 +5,19 @@ from flask import (
     request
 )
 #from forms import InsertAppointment
+from postgres import postgres
 
 appointment = Blueprint('appointment', __name__)
 
 @appointment.route('/appointment', methods=["GET", "POST"])
 def appointment_info():
-#    form = InsertAppointment()
-    if request.method != "GET":
-        if form.validate_on_submit():
-            print('here', flush=True)
-    return render_template(
-        'appointment.html',
-#        form=form
-    )
+    pg = postgres()
+    vets=pg.execute_read_query("SELECT * FROM veterinarian_office.vet")
+    curr_vet = request.form.get('vet')
+    if curr_vet is None:
+        curr_vet = str(vets[0][0])
+    appointments = pg.execute_read_query("SELECT * FROM veterinarian_office.appointment "+
+                                         "INNER JOIN veterinarian_office.animal "+
+                                         "ON veterinarian_office.appointment.pet_id = veterinarian_office.animal.pet_id "+
+                                         "WHERE vet_id="+curr_vet+" ORDER BY pet_name, appointment_date DESC")
+    return render_template('appointment.html', vets=vets, appointments=appointments)
