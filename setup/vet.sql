@@ -1,10 +1,10 @@
 CREATE SCHEMA veterinarian_office;
 
 CREATE TABLE veterinarian_office.animal(
-    pet_id INT NOT NULL UNIQUE,
+    pet_id SERIAL NOT NULL UNIQUE,
     pet_name VARCHAR ( 255 ) NOT NULL,
     pet_birthdate DATE NOT NULL,
-    pet_sex VARCHAR ( 1 ) NOT NULL,
+    pet_sex CHAR ( 1 ) NOT NULL,
     species VARCHAR ( 255 ) NOT NULL,
     breed VARCHAR ( 255 ) NOT NULL,
     color VARCHAR ( 255 ) NOT NULL,
@@ -12,13 +12,13 @@ CREATE TABLE veterinarian_office.animal(
 );
 
 CREATE TABLE veterinarian_office.vet(
-    vet_id INT NOT NULL UNIQUE,
+    vet_id SERIAL NOT NULL UNIQUE,
     vet_name VARCHAR ( 255 ) NOT NULL,
     PRIMARY KEY ( vet_id )
 );
 
 CREATE TABLE veterinarian_office.appointment(
-    pet_id int NOT NULL,
+    pet_id INT NOT NULL,
     appointment_date DATE NOT NULL,
     vet_id INT NOT NULL,
     weight INT,
@@ -34,7 +34,7 @@ CREATE TABLE veterinarian_office.appointment(
 );
 
 CREATE TABLE veterinarian_office.allergy(
-    pet_id int NOT NULL,
+    pet_id INT NOT NULL,
     allergy VARCHAR ( 255 ) NOT NULL,
     PRIMARY KEY ( pet_id, allergy ),
     CONSTRAINT fk_pet_id_animal
@@ -44,7 +44,7 @@ CREATE TABLE veterinarian_office.allergy(
 );
 
 CREATE TABLE veterinarian_office.condition(
-    pet_id int NOT NULL,
+    pet_id INT NOT NULL,
     medical_condition VARCHAR ( 255 ) NOT NULL,
     is_active BOOLEAN NOT NULL,
     PRIMARY KEY ( pet_id, medical_condition ),
@@ -55,7 +55,7 @@ CREATE TABLE veterinarian_office.condition(
 );
 
 CREATE TABLE veterinarian_office.prescription(
-    pet_id int NOT NULL,
+    pet_id INT NOT NULL,
     appointment_date DATE NOT NULL,
     prescription VARCHAR ( 255 ) NOT NULL,
     PRIMARY KEY ( pet_id, appointment_date, prescription ),
