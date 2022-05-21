@@ -20,10 +20,10 @@ SCHEMA = "CREATE SCHEMA veterinarian_office;\n\n"
 
 ANIMAL = (
     "CREATE TABLE veterinarian_office.animal(\n"
-    "    pet_id INT NOT NULL UNIQUE,\n"
+    "    pet_id SERIAL NOT NULL UNIQUE,\n"
     "    pet_name VARCHAR ( 255 ) NOT NULL,\n"
     "    pet_birthdate DATE NOT NULL,\n"
-    "    pet_sex VARCHAR ( 1 ) NOT NULL,\n"
+    "    pet_sex CHAR ( 1 ) NOT NULL,\n"
     "    species VARCHAR ( 255 ) NOT NULL,\n"
     "    breed VARCHAR ( 255 ) NOT NULL,\n"
     "    color VARCHAR ( 255 ) NOT NULL,\n"
@@ -35,7 +35,7 @@ ANIMAL = (
 
 VET  = (
     "CREATE TABLE veterinarian_office.vet(\n"
-    "    vet_id INT NOT NULL UNIQUE,\n"
+    "    vet_id SERIAL NOT NULL UNIQUE,\n"
     "    vet_name VARCHAR ( 255 ) NOT NULL,\n"
     "    PRIMARY KEY ( vet_id )\n"
     ");\n\n"
@@ -45,7 +45,7 @@ VET  = (
 
 APPOINTMENT = (
     "CREATE TABLE veterinarian_office.appointment(\n"
-    "    pet_id int NOT NULL,\n"
+    "    pet_id INT NOT NULL,\n"
     "    appointment_date DATE NOT NULL,\n"
     "    vet_id INT NOT NULL,\n"
     "    weight INT,\n"
@@ -65,7 +65,7 @@ APPOINTMENT = (
 
 ALLERGY = (
     "CREATE TABLE veterinarian_office.allergy(\n"
-    "    pet_id int NOT NULL,\n"
+    "    pet_id INT NOT NULL,\n"
     "    allergy VARCHAR ( 255 ) NOT NULL,\n"
     "    PRIMARY KEY ( pet_id, allergy ),\n"
     "    CONSTRAINT fk_pet_id_animal\n"
@@ -79,7 +79,7 @@ ALLERGY = (
 
 CONDITION = (
     "CREATE TABLE veterinarian_office.condition(\n"
-    "    pet_id int NOT NULL,\n"
+    "    pet_id INT NOT NULL,\n"
     "    medical_condition VARCHAR ( 255 ) NOT NULL,\n"
     "    is_active BOOLEAN NOT NULL,\n"
     "    PRIMARY KEY ( pet_id, medical_condition ),\n"
@@ -92,7 +92,7 @@ CONDITION = (
 
 PRESCRIPTION = (
     "CREATE TABLE veterinarian_office.prescription(\n"
-    "    pet_id int NOT NULL,\n"
+    "    pet_id INT NOT NULL,\n"
     "    appointment_date DATE NOT NULL,\n"
     "    prescription VARCHAR ( 255 ) NOT NULL,\n"
     "    PRIMARY KEY ( pet_id, appointment_date, prescription ),\n"

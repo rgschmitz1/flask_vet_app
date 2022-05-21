@@ -28,7 +28,7 @@ def patient_info():
                 flash('ERROR: Failed to add patient to database.')
         else:
             flash('ERROR: Issue in patient info, please check inputs')
-    animals = pg.execute_read_query("SELECT * FROM veterinarian_office.animal")
+    animals = pg.execute_read_query("SELECT * FROM veterinarian_office.animal ORDER BY pet_id")
     return render_template(
         'patient.html',
         form=form,
