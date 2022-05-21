@@ -25,7 +25,7 @@ def date_in_future(form, field):
 class InsertPatient(FlaskForm):
     name = StringField(
         "Name",
-        validators=[DataRequired()]
+        validators=[DataRequired(), Length(max=255)]
     )
     birthdate = DateField(
         "Birthdate",
@@ -35,7 +35,7 @@ class InsertPatient(FlaskForm):
     # species should maybe be a choicefield or a combo of user input and choice?
     species = StringField(
         "Species",
-        validators=[DataRequired()]
+        validators=[DataRequired(), Length(max=255)]
     )
     sex = SelectField(
         "Sex",
@@ -44,11 +44,11 @@ class InsertPatient(FlaskForm):
     )
     breed = StringField(
         "Breed",
-        validators=[DataRequired()]
+        validators=[DataRequired(), Length(max=255)]
     )
     color = StringField(
         "Color",
-        validators=[DataRequired()]
+        validators=[DataRequired(), Length(max=255)]
     )
     submit = SubmitField("Save")
     
