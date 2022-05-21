@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Aggregate{% endblock %}
+{% block content %}
+<form action="/aggregate" method="POST">
+    <SELECT name="species">
+        {% for s in species %}
+            <OPTION value={{s}}>{{s}}</option type="submit">
+        {% endfor %}
+        <input type="submit" value="Select Species">
+    </select>
+</form>
+
+<div class="card bg-light p-3">
+    <caption>Species shown: {{curr_species}}</caption>
+	<table id="data" class="table table-striped">
+		<thead>
+			<tr>
+    			<th>Patient ID</th>
+				<th>Medical Conditions</th>
+				<th>Allergies</th>
+			</tr>
+		</thead>
+		<tbody>
+    		{% for info in medical_info %}
+			<tr>
+    			<td>{{ info['pet_id'] }}</td>
+    			<td>{{ info['medical_condition'] }}</td>
+    			<td>{{ info['allergy'] }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
