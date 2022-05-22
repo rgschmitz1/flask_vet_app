@@ -33,9 +33,9 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt update && sudo apt install -y postgresql-client-13
 ```
 
-Import `vet.sql` using the following command from Linux. Replace `<endpoint>` with the database endpoint from the created database.
+Import `setup.sql` using the following command from Linux. Replace `<endpoint>` with the database endpoint from the created database.
 ```
-psql --host=<endpoint> --port=5432 --username=postgres --password --dbname=postgres --file=vet.sql
+psql --host=<endpoint> --port=5432 --username=postgres --password --dbname=postgres --file=setup.sql
 ```
 
 # Running App

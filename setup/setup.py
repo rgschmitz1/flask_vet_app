@@ -507,5 +507,5 @@ for index in range(1, VET_COUNT + 1):
     sql_code += generate_pet(vet_id, "Cat", 22)
 
 
-with open("vet.sql", "w") as file:
+with open("setup.sql", "w") as file:
     file.write(sql_code)
