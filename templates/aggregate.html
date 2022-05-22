@@ -26,9 +26,9 @@
 		<tbody>
     		{% for condition in conditions %}
 			<tr>
-    			<td>{{ condition[0] }}</td>
-    			<td>{{ condition[1] }}</td>
-                <td>{{ condition[2] }}</td>
+    			<td>{{ condition['condition'] }}</td>
+    			<td>{{ condition['type'] }}</td>
+                <td>{{ condition['case_count'] }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

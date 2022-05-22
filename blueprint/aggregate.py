@@ -41,19 +41,19 @@ def aggregate_info():
     #                                      "GROUP BY allergy " +
     #                                      "ORDER BY COUNT DESC")
 
-    conditions = pg.execute_read_query("SELECT DISTINCT medical_condition, 'medical' as type, COUNT (medical_condition) FROM veterinarian_office.condition "+
+    conditions = pg.execute_read_query("SELECT DISTINCT medical_condition as condition, 'medical' as type, COUNT (medical_condition) as case_count FROM veterinarian_office.condition "+
                                          "INNER JOIN veterinarian_office.animal "+
                                          "ON veterinarian_office.condition.pet_id = veterinarian_office.animal.pet_id "+
                                          "WHERE species='"+curr_species+"'" +
                                          "GROUP BY medical_condition "  # +
                                          # "ORDER BY COUNT DESC " +
                                          "UNION " +
-                                         "SELECT DISTINCT allergy, 'allergy' as type, count(allergy) FROM veterinarian_office.allergy "+
+                                         "SELECT DISTINCT allergy as condition, 'allergy' as type, count(allergy) as case_count FROM veterinarian_office.allergy "+
                                             "INNER JOIN veterinarian_office.animal " +
                                             "ON veterinarian_office.allergy.pet_id = veterinarian_office.animal.pet_id " +
                                             "WHERE species='" + curr_species + "'"
                                             "GROUP BY allergy " +
-                                            "ORDER BY COUNT DESC")
+                                            "ORDER BY case_count DESC")
     print("CONDITIONS", conditions)
     # print("ALLERGIES", allergies)
 
