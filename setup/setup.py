@@ -169,7 +169,7 @@ def get_cat_breed():
             "American Bobtail",
             "Siamese",
             "Burmese",
-            "Sphinx"
+            "Sphinx",
             "Manx",
             "British Longhair",
             "Persian",
