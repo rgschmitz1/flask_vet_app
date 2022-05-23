@@ -26,32 +26,53 @@ def aggregate_info():
     curr_species = request.form.get('species')
     if curr_species is None:
         curr_species = str(species[0])
-# =============================================================================
-#     conditions = pg.execute_read_query("SELECT DISTINCT medical_condition FROM veterinarian_office.condition "+
-#                                          "INNER JOIN veterinarian_office.animal "+
-#                                          "ON veterinarian_office.condition.pet_id = veterinarian_office.animal.pet_id "+
-#                                          "WHERE species='"+curr_species+"'")
-#     print("CONDITIONS", conditions)
-#     
-#     allergies = pg.execute_read_query("SELECT DISTINCT allergy FROM veterinarian_office.allergy "+
-#                                          "INNER JOIN veterinarian_office.animal "+
-#                                          "ON veterinarian_office.allergy.pet_id = veterinarian_office.animal.pet_id "+
-#                                          "WHERE species='"+curr_species+"'")
-# =============================================================================
 
-    medical_info = pg.execute_read_query("WITH PetAllergies AS("+
-                                   "SELECT allergy, A.pet_id FROM veterinarian_office.allergy, veterinarian_office.animal A "+
-                                   "WHERE A.pet_id = veterinarian_office.allergy.pet_id "+
-                                   "AND A.species='"+curr_species+"') "+
-                                   "SELECT DISTINCT * FROM PetAllergies "+
-                                   "INNER JOIN veterinarian_office.condition C "+
-                                   "ON C.pet_id = PetAllergies.pet_id ")
+    # medical_conditions = pg.execute_read_query("SELECT DISTINCT medical_condition, 'Medical Condition' as type, COUNT (medical_condition) FROM veterinarian_office.condition "+
+    #                                      "INNER JOIN veterinarian_office.animal "+
+    #                                      "ON veterinarian_office.condition.pet_id = veterinarian_office.animal.pet_id "+
+    #                                      "WHERE species='"+curr_species+"'" +
+    #                                      "GROUP BY medical_condition " +
+    #                                      "ORDER BY COUNT DESC")
+    #
+    # allergies = pg.execute_read_query("SELECT DISTINCT allergy, count (allergy) FROM veterinarian_office.allergy "+
+    #                                      "INNER JOIN veterinarian_office.animal "+
+    #                                      "ON veterinarian_office.allergy.pet_id = veterinarian_office.animal.pet_id "+
+    #                                      "WHERE species='"+curr_species+"'"
+    #                                      "GROUP BY allergy " +
+    #                                      "ORDER BY COUNT DESC")
+
+    conditions = pg.execute_read_query("SELECT DISTINCT medical_condition as condition, 'medical' as type, COUNT (medical_condition) as case_count FROM veterinarian_office.condition "+
+                                         "INNER JOIN veterinarian_office.animal "+
+                                         "ON veterinarian_office.condition.pet_id = veterinarian_office.animal.pet_id "+
+                                         "WHERE species='"+curr_species+"'" +
+                                         "GROUP BY medical_condition "  # +
+                                         # "ORDER BY COUNT DESC " +
+                                         "UNION " +
+                                         "SELECT DISTINCT allergy as condition, 'allergy' as type, count(allergy) as case_count FROM veterinarian_office.allergy "+
+                                            "INNER JOIN veterinarian_office.animal " +
+                                            "ON veterinarian_office.allergy.pet_id = veterinarian_office.animal.pet_id " +
+                                            "WHERE species='" + curr_species + "'"
+                                            "GROUP BY allergy " +
+                                            "ORDER BY case_count DESC")
+    print("CONDITIONS", conditions)
+    # print("ALLERGIES", allergies)
+
+    # medical_info = pg.execute_read_query("WITH PetAllergies AS("+
+    #                                "SELECT allergy, A.pet_id FROM
+    #                                veterinarian_office.allergy,
+    #                                veterinarian_office.animal A "+
+    #                                "WHERE A.pet_id =
+    #                                veterinarian_office.allergy.pet_id "+
+    #                                "AND A.species='"+curr_species+"') "+
+    #                                "SELECT DISTINCT * FROM PetAllergies "+
+    #                                "INNER JOIN veterinarian_office.condition C "+
+    #                                "ON C.pet_id = PetAllergies.pet_id ")
 
 
-# =============================================================================
-#     allergies = [str(s).replace("['", "").replace("']", "") for s in allergies]
-#     conditions = [str(s).replace("['", "").replace("']", "") for s in conditions]
-# =============================================================================
+
+    # allergies = [str(s).replace("['", "").replace("']", "") for s in allergies]
+    # conditions = [str(s).replace("['", "").replace("']", "") for s in conditions]
+
 
     return render_template('aggregate.html', species=species,
-                           curr_species=curr_species, medical_info=medical_info)
+                           curr_species=curr_species, conditions=conditions)
