@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Patient Info{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.20.1/dist/bootstrap-table.min.css">
+{% endblock %}
+{% block content %}
+<div class="card bg-light p-3">
+	<div class="item">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th data-sortable="true" data-field="allergy">Allergy</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for allergy in allergies %}
+				<tr>
+					<td>{{ allergy['allergy'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th data-sortable="true" data-field="condition">Condition</th>
+					<th data-sortable="true" data-field="is-active">Is Active</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for condition in conditions %}
+				<tr>
+					<td>{{ condition['medical_condition'] }}</td>
+					<td>{{ condition['is_active'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th data-sortable="true" data-field="prescription">Prescription</th>
+					<th data-sortable="true" data-field="appointment_date">Prescribed On</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for prescription in prescriptions %}
+				<tr>
+					<td>{{ prescription['prescription'] }}</td>
+					<td>{{ prescription['appointment_date'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+			<thead>
+				<tr>
+					<th data-sortable="true" data-field="appointment_date">Date</th>
+					<th data-sortable="true" data-field="vet_id">Vet</th>
+					<th data-sortable="true" data-field="weight">Weight</th>
+					<th data-sortable="true" data-field="notes">Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for appointment in appointments %}
+				<tr>
+					<td>{{ appointment['appointment_date'] }}</td>
+					<td>{{ appointment['vet_id'] }}</td>
+					<td>{{ appointment['weight'] }}</td>
+					<td>{{ appointment['notes'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.20.1/dist/bootstrap-table.min.js"></script>
+{% endblock %}

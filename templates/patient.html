@@ -78,7 +78,7 @@
 		<tbody>
 			{% for animal in animals %}
 			<tr>
-				<td>{{ animal['pet_id'] }}</td>
+				<td><a href="/patient/{{ animal['pet_id'] }}">{{ animal['pet_id'] }}</a></td>
 				<td>{{ animal['pet_name'] }}</td>
 				<td>{{ animal['pet_birthdate'] }}</td>
 				<td>{{ animal['species'] }}</td>
