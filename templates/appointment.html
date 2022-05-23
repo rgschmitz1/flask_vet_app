@@ -5,17 +5,17 @@
 {% endblock %}
 {% block content %}
 <form action="/appointment" method="POST">
-    <SELECT name="vet">
-        {% for v in vets %}
-            <OPTION value={{v.vet_id}}>{{v.vet_name}}</option type="submit">
-        {% endfor %}
-        <input type="submit" value="Select Veterinarian">
-    </select>
+	<select name="vet">
+		{% for v in vets %}
+		<option value={{v.vet_id}}>{{v.vet_name}}</option type="submit">
+		{% endfor %}
+		<input type="submit" value="Select Veterinarian">
+	</select>
 </form>
 
 <div class="card bg-light p-3">
-    <caption><br /><strong>Patients shown for:</strong> Dr. {{curr_vet}}</caption>
-    <table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+	<div id=table-caption><strong>Patients shown for:</strong><br/>Dr. {{curr_vet}}</div>
+	<table data-toolbar="#table-caption" data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
 				<th data-sortable="true" data-field="name">Name</th>
