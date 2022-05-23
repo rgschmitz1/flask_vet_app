@@ -6,7 +6,8 @@
 {% block content %}
 <div class="card bg-light p-3">
 	<div class="item">
-		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped caption-top">
+			<caption>Allergies</caption>
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="allergy">Allergy</th>
@@ -23,7 +24,8 @@
 	</div>
 
 	<div class="item">
-		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped caption-top">
+			<caption>Conditions</caption>
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="condition">Condition</th>
@@ -42,11 +44,13 @@
 	</div>
 
 	<div class="item">
-		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped caption-top">
+			<caption>Prescriptions</caption>
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="prescription">Prescription</th>
 					<th data-sortable="true" data-field="appointment_date">Prescribed On</th>
+					<th data-sortable="true" data-field="vet_name">Prescribed By</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +58,7 @@
 				<tr>
 					<td>{{ prescription['prescription'] }}</td>
 					<td>{{ prescription['appointment_date'] }}</td>
+					<td>{{ prescription['vet_name'] }}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
@@ -61,12 +66,13 @@
 	</div>
 
 	<div class="item">
-		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+		<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped caption-top">
+			<caption>Appointments</caption>
 			<thead>
 				<tr>
 					<th data-sortable="true" data-field="appointment_date">Date</th>
 					<th data-sortable="true" data-field="vet_id">Vet</th>
-					<th data-sortable="true" data-field="weight">Weight</th>
+					<th data-sortable="true" data-field="weight">Paitient Weight</th>
 					<th data-sortable="true" data-field="notes">Notes</th>
 				</tr>
 			</thead>
@@ -74,7 +80,7 @@
 				{% for appointment in appointments %}
 				<tr>
 					<td>{{ appointment['appointment_date'] }}</td>
-					<td>{{ appointment['vet_id'] }}</td>
+					<td>{{ appointment['vet_name'] }}</td>
 					<td>{{ appointment['weight'] }}</td>
 					<td>{{ appointment['notes'] }}</td>
 				</tr>
