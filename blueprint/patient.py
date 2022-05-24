@@ -36,6 +36,7 @@ def patient_info(pet_id=None):
             flash('ERROR: Issue in patient info, please check inputs')
     # Detailed paitient records view
     if pet_id:
+        animals = pg.execute_read_query(f"SELECT * FROM veterinarian_office.animal WHERE pet_id = '{pet_id}'")
         allergies = pg.execute_read_query(f"SELECT allergy FROM veterinarian_office.allergy WHERE pet_id = '{pet_id}'")
         conditions = pg.execute_read_query(f"SELECT medical_condition, is_active FROM veterinarian_office.condition WHERE pet_id = '{pet_id}'")
         prescriptions = pg.execute_read_query(f"""SELECT p.prescription AS prescription, p.appointment_date appointment_date, v.vet_name AS vet_name
@@ -46,6 +47,7 @@ def patient_info(pet_id=None):
             WHERE a.pet_id = '{pet_id}' AND a.vet_id = v.vet_id""")
         return render_template(
             'patient_id.html',
+            animals=animals,
             allergies=allergies,
             appointments=appointments,
             conditions=conditions,

@@ -5,6 +5,41 @@
 {% endblock %}
 {% block content %}
 <div class="card bg-light p-3">
+	<div id="animal-caption">
+		<h3>Animal</h3>
+	</div>
+	<div class="item pb-3">
+		<table
+			data-toolbar="#animal-caption"
+			data-toggle="table"
+			data-classes="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th data-field="id">ID</th>
+					<th data-field="name">Name</th>
+					<th data-field="birthdate">Birthdate</th>
+					<th data-field="species">Species</th>
+					<th data-field="sex">Sex</th>
+					<th data-field="breed">Breed</th>
+					<th data-field="color">Color</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for animal in animals %}
+				<tr>
+					<td>{{ animal['pet_id'] }}</td>
+					<td>{{ animal['pet_name'] }}</td>
+					<td>{{ animal['pet_birthdate'] }}</td>
+					<td>{{ animal['species'] }}</td>
+					<td>{{ animal['pet_sex'] }}</td>
+					<td>{{ animal['breed'] }}</td>
+					<td>{{ animal['color'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
 	<div id="allergy-caption">
 		<h3>Allergies</h3>
 	</div>
