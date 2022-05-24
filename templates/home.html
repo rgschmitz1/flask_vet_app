@@ -1,54 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<div class="card bg-light p-3" style="width: 70%; margin: 0 auto;">
-    <p>
-        <strong>Welcome to UW Veterinarian!</strong>
-    </p>
-    <p>
-        This database application was developed by Bob Schmitz, Danielle Lambion and Rick Morrow as a final
-        project for UW Tacoma's TCSS-545, Advanced Databases.
-    </p>
-    <p>
-        The application represents an initial build of patient and appointment tracking software for use
-        at veterinary clinics. The application's current functionality includes the following:
-    </p>
-    <p>
-        <ul style="list-style-type: none;">
-            <li style="margin: 20px 0;">
-                <div style="display: flex; align-items: center;">
-                    <i class="fa-solid fa-paw fa-2x">&nbsp;&nbsp;</i><a href="/patient">Listing all patients</a>&nbsp;at a clinic with sorting and filtering
-                </div>
-            </li>
-             <li style="margin: 20px 0;">
-                <div style="display: flex; align-items: center;">
-                    <i class="fa-solid fa-file-medical fa-2x">&nbsp;&nbsp;</i><a href="/patient">Adding a new patient</a>&nbsp;record
-                </div>
-             </li>
-             <li style="margin: 20px 0;">
-                <div style="display: flex; align-items: center;">
-                    <i class="fa-solid fa-stethoscope fa-2x">&nbsp;&nbsp;</i><a href="patient/11500">Viewing medical records</a>&nbsp;for an individual patient
-                </div>
-             </li>
-             <li style="margin: 20px 0;">
-                 <div style="display: flex; align-items: center;">
-                     <i class="fa-solid fa-calendar-check fa-2x">&nbsp;&nbsp;</i><a href="/appointment" >Viewing appointment records</a>&nbsp;for individual veterinarians
-                 </div>
-            </li>
-            <li style="margin: 20px 0;">
-                 <div style="display: flex; align-items: center;">
-                     <i class="fa-solid fa-laptop-medical fa-2x"></i>&nbsp;&nbsp;</i><a href="/aggregate" >Viewing aggregate data</a>&nbsp;on conditions and allergies
-                 </div>
-            </li>
-        </ul>
-    </p>
-    <p>
-        The database for this software his hosted with Amazon RDS, and the API is built using Python's Flask
-        library and Jinja2 templates.
-    </p>
-    <p>
-        Site icons are obtained from bootstrap and Fontawesome. Bootstrap is also used for CSS.
-    </p>
+<div class="d-flex justify-content-center">
+	<div class="card bg-light col-sm-8 p-3">
+		<p>
+		<strong>Welcome to UW Veterinarian!</strong>
+		</p>
+		<p>
+		This database application was developed by Bob Schmitz, Danielle Lambion and Rick Morrow as a final
+		project for UW Tacoma's TCSS-545, Advanced Databases.
+		</p>
+		<p>
+		The application represents an initial build of patient and appointment tracking software for use
+		at veterinary clinics. The application's current functionality includes the following:
+		</p>
+		<p>
+		<table class="table table-borderless">
+			<tr>
+				<td><i class="fa-solid fa-paw fa-2x"></i></td>
+				<td><a href="/patient">Listing all patients</a> at a clinic with sorting and filtering</td>
+			</tr>
+			<tr>
+				<td><i class="fa-solid fa-file-medical fa-2x"></i></td>
+				<td><a href="/patient">Adding a new patient</a> record</td>
+			</tr>
+			<tr>
+				<td><i class="fa-solid fa-stethoscope fa-2x"></i></td>
+				<td><a href="patient/11500">Viewing medical records</a> for an individual patient</td>
+			</tr>
+			<tr>
+				<td><i class="fa-solid fa-calendar-check fa-2x"></i></td>
+				<td><a href="/appointment">Viewing appointment records</a> for individual veterinarians</td>
+			</tr>
+			<tr>
+				<td><i class="fa-solid fa-laptop-medical fa-2x"></i></td>
+				<td><a href="/aggregate">Viewing aggregate data</a> on conditions and allergies</td>
+			</tr>
+		</table>
+		</p>
+		<p>
+		The database for this software his hosted with Amazon RDS, and the API is built using Python's Flask
+		library and Jinja2 templates.
+		</p>
+		<p>
+		Site icons are obtained from bootstrap and Fontawesome. Bootstrap is also used for CSS.
+		</p>
+	</div>
 </div>
 {% endblock %}
 {% block scripts %}<script src="https://kit.fontawesome.com/3bd96ec630.js" crossorigin="anonymous"></script>{% endblock %}
