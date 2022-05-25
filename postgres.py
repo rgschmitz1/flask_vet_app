@@ -1,3 +1,10 @@
+"""
+PostgreSQL database handler,
+functions referenced from https://realpython.com/python-sql-libraries/
+
+@author: Bob Schmitz
+"""
+
 import psycopg2
 import psycopg2.extras
 from psycopg2 import OperationalError

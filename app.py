@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+"""
+Main application entrypoint
+
+@author: Bob Schmitz, Danielle Lambion
+"""
+
 from flask import Flask
 from blueprint.home import home
 from blueprint.patient import patient
@@ -7,7 +13,8 @@ from blueprint.aggregate import aggregate
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
-# Blueprints
+
+# Blueprints provide application logic and routing
 app.register_blueprint(home)
 app.register_blueprint(patient)
 app.register_blueprint(appointment)

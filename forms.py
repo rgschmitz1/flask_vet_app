@@ -1,19 +1,20 @@
+"""
+Populate applicaiton forms
+
+@author: Bob Schmitz
+"""
+
 from datetime import date
 from flask_wtf import FlaskForm
 from wtforms import (
-    BooleanField,
     DateField,
-    FieldList,
     IntegerField,
-    SelectField,
     StringField,
     SubmitField,
     ValidationError,
 )
-#from wtforms.fields.html5 import DateField
 from wtforms.validators import (
     DataRequired,
-    EqualTo,
     Length,
     Optional,
 )
@@ -22,7 +23,11 @@ def date_in_future(form, field):
     if (field.data>date.today()):
         raise ValidationError('Date must not be in the future')
 
+
 class InsertPatient(FlaskForm):
+    """
+    Form to insert a new patient into database
+    """
     name = StringField(
         "Name",
         validators=[DataRequired(), Length(max=255)]
