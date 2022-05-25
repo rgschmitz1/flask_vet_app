@@ -1,5 +1,12 @@
 # !usr/bin/python
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May 15 20:02:19 2022
 
+@author: Rick Morrow
+
+Back-end functionality and queries for aggregate species information
+"""
 from faker import Faker
 
 # This script will generate a SQL file to set up tables for the

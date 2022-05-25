@@ -3,13 +3,12 @@
 """
 Created on Tue May 17 20:02:19 2022
 
-@author: Danielle Lambion
+@author: Danielle Lambion, Rick Morrow
 
 Back-end functionality and queries for aggregate species information
 """
 from flask import (
     Blueprint,
-    redirect,
     render_template,
     request
 )

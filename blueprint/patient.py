@@ -1,7 +1,6 @@
 from flask import (
     Blueprint,
     flash,
-    redirect,
     render_template,
     request
 )
@@ -34,7 +33,8 @@ def patient_info(pet_id=None):
                 flash('ERROR: Failed to add patient to database.')
         else:
             flash('ERROR: Issue in patient info, please check inputs')
-    # Detailed paitient records view
+    # Detailed patient records view. This is conditional -- only executes
+    # when a patient ID is passed in with the URI.
     if pet_id:
         animals = pg.execute_read_query(f"SELECT * FROM veterinarian_office.animal WHERE pet_id = '{pet_id}'")
         allergies = pg.execute_read_query(f"SELECT allergy FROM veterinarian_office.allergy WHERE pet_id = '{pet_id}'")
@@ -53,7 +53,7 @@ def patient_info(pet_id=None):
             conditions=conditions,
             prescriptions=prescriptions,
         )
-    # All paitient records
+    # All patient records. This is the default query.
     else:
         animals = pg.execute_read_query("SELECT * FROM veterinarian_office.animal ORDER BY pet_id")
         return render_template(
