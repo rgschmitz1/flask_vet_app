@@ -16,23 +16,7 @@ def patient_info(pet_id=None):
 
     input id: optional numeric patient id to display detailed paitient records
     """
-    form = InsertPatient()
     pg = postgres()
-    # If a POST request is made and pet_id is None, then add a new paitient
-    if request.method == "POST" and pet_id == None:
-        if form.validate_on_submit():
-            query = f"""INSERT INTO veterinarian_office.animal(
-                    pet_name, pet_birthdate, pet_sex, species, breed, color
-                )VALUES(
-                    '{form.name.data}', '{form.birthdate.data}', '{form.sex.data}',
-                    '{form.species.data}', '{form.breed.data}', '{form.color.data}'
-                )"""
-            if pg.execute_query(query):
-                flash('Successfully added patient to database.')
-            else:
-                flash('ERROR: Failed to add patient to database.')
-        else:
-            flash('ERROR: Issue in patient info, please check inputs')
     # Detailed patient records view. This is conditional -- only executes
     # when a patient ID is passed in with the URI.
     if pet_id:
@@ -55,6 +39,22 @@ def patient_info(pet_id=None):
         )
     # All patient records. This is the default query.
     else:
+        # If a POST request is made and pet_id is None, then add a new paitient
+        form = InsertPatient()
+        if request.method == "POST":
+            if form.validate_on_submit():
+                query = f"""INSERT INTO veterinarian_office.animal(
+                        pet_name, pet_birthdate, pet_sex, species, breed, color
+                    )VALUES(
+                        '{form.name.data}', '{form.birthdate.data}', '{form.sex.data}',
+                        '{form.species.data}', '{form.breed.data}', '{form.color.data}'
+                    )"""
+                if pg.execute_query(query):
+                    flash('Successfully added patient to database.')
+                else:
+                    flash('ERROR: Failed to add patient to database.')
+            else:
+                flash('ERROR: Issue in patient info, please check inputs')
         animals = pg.execute_read_query("SELECT * FROM veterinarian_office.animal ORDER BY pet_id")
         return render_template(
             'patient.html',
