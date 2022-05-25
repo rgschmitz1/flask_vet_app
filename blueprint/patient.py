@@ -1,3 +1,9 @@
+"""
+Route for adding and displaying patient information
+
+@author: Bob Schmitz
+"""
+
 from flask import (
     Blueprint,
     flash,

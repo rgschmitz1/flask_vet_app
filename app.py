@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-from flask import (
-    Flask,
-    abort,
-    flash,
-    redirect,
-    render_template,
-    request,
-    session,
-)
-import forms
+from flask import Flask
 from blueprint.home import home
 from blueprint.patient import patient
 from blueprint.appointment import appointment
