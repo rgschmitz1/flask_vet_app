@@ -56,4 +56,3 @@ class InsertPatient(FlaskForm):
         validators=[DataRequired(), Length(max=255)]
     )
     submit = SubmitField("Save")
-    
