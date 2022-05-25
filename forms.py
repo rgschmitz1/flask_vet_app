@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 from wtforms import (
     DateField,
     IntegerField,
+    SelectField,
     StringField,
     SubmitField,
     ValidationError,
