@@ -35,6 +35,9 @@ class postgres():
         except Error as e:
             print(f"The error '{e}' occurred")
             return False
+        finally:
+            print("closing DB connection")
+            connection.close()
 
 
     def execute_read_query(self, query):
@@ -47,3 +50,6 @@ class postgres():
             return result
         except OperationalError as e:
             print(f"The error '{e}' occurred")
+        finally:
+            print("closing DB connection")
+            connection.close()
