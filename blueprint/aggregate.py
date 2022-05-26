@@ -35,7 +35,7 @@ def aggregate_info():
     """
     pg = postgres()
     species = pg.execute_read_query("SELECT DISTINCT species FROM veterinarian_office.animal")
-    species = [str(s).replace("['", "").replace("']", "") for s in species]
+    species = [str(s[0]) for s in species]
     curr_species = request.form.get('species')
     if curr_species is None:
         curr_species = str(species[0])
@@ -45,19 +45,18 @@ def aggregate_info():
     # medical conditions affecting a species. It renames the allery and
     # medical condition headers to be 'condition' and adds a new column
     # 'type' that indicates whether the condition is medical or an allergy.
-    conditions = pg.execute_read_query("SELECT DISTINCT medical_condition as condition, 'medical' as type, COUNT (medical_condition) as case_count FROM veterinarian_office.condition "+
-                                         "INNER JOIN veterinarian_office.animal "+
-                                         "ON veterinarian_office.condition.pet_id = veterinarian_office.animal.pet_id "+
-                                         "WHERE species='"+curr_species+"'" +
-                                         "GROUP BY medical_condition "  # +
-                                         # "ORDER BY COUNT DESC " +
-                                         "UNION " +
-                                         "SELECT DISTINCT allergy as condition, 'allergy' as type, count(allergy) as case_count FROM veterinarian_office.allergy "+
-                                            "INNER JOIN veterinarian_office.animal " +
-                                            "ON veterinarian_office.allergy.pet_id = veterinarian_office.animal.pet_id " +
-                                            "WHERE species='" + curr_species + "'"
-                                            "GROUP BY allergy " +
-                                            "ORDER BY case_count DESC")
+    conditions = pg.execute_read_query(f"""SELECT DISTINCT medical_condition AS condition, 'medical' AS type, COUNT(medical_condition) AS case_count
+                                           FROM veterinarian_office.condition
+                                           NATURAL JOIN veterinarian_office.animal
+                                           WHERE species='{curr_species}'
+                                           GROUP BY medical_condition
+                                           UNION
+                                           SELECT DISTINCT allergy AS condition, 'allergy' AS type, COUNT(allergy) AS case_count
+                                           FROM veterinarian_office.allergy
+                                           NATURAL JOIN veterinarian_office.animal
+                                           WHERE species='{curr_species}'
+                                           GROUP BY allergy
+                                           ORDER BY case_count DESC""")
 
     # Returns data to the template. It stores a default species, a
     # selected species (curr_species) used in the queries and the conditions

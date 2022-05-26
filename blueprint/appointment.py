@@ -23,11 +23,15 @@ def appointment_info():
     curr_vet = request.form.get('vet')
     if curr_vet is None:
         curr_vet = str(vets[0][0])
-    appointments = pg.execute_read_query("SELECT * FROM veterinarian_office.appointment "+
-                                         "INNER JOIN veterinarian_office.animal "+
-                                         "ON veterinarian_office.appointment.pet_id = veterinarian_office.animal.pet_id "+
-                                         "WHERE vet_id="+curr_vet+" ORDER BY pet_name, appointment_date DESC")
-    vet_name = pg.execute_read_query("SELECT vet_name FROM veterinarian_office.vet "+
-                                     "WHERE vet_id='"+curr_vet+"'")
+    appointments = pg.execute_read_query(f"""SELECT * FROM veterinarian_office.appointment
+                                         NATURAL JOIN veterinarian_office.animal
+                                         WHERE vet_id={curr_vet} ORDER BY pet_name, appointment_date DESC""")
+
+    # Check for current vet name in vets
+    for vet in vets:
+        if (str(vet['vet_id']) == str(curr_vet)):
+            curr_vet = vet['vet_name']
+            break
+
     return render_template('appointment.html', vets=vets, appointments=appointments,
-                           curr_vet=vet_name[0][0])
+                           curr_vet=curr_vet)

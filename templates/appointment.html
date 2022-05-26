@@ -7,7 +7,11 @@
 <form action="/appointment" method="POST">
 	<select name="vet">
 		{% for v in vets %}
+		{% if curr_vet == v.vet_name %}
+		<option value={{v.vet_id}} selected>{{v.vet_name}}</option type="submit">
+		{% else %}
 		<option value={{v.vet_id}}>{{v.vet_name}}</option type="submit">
+		{% endif %}
 		{% endfor %}
 		<input type="submit" value="Select Veterinarian">
 	</select>
