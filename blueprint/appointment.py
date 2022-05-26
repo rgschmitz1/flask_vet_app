@@ -21,14 +21,19 @@ def appointment_info():
     pg = postgres()
     vets = pg.execute_read_query("SELECT * FROM veterinarian_office.vet")
     curr_vet = request.form.get('vet')
-    if curr_vet is None:
-        curr_vet = str(vets[0][0])
-    appointments = pg.execute_read_query(f"""SELECT * FROM veterinarian_office.appointment
+    if curr_vet is None or curr_vet == '0':
+        appointments = pg.execute_read_query(f"""SELECT * FROM veterinarian_office.appointment
+                                             NATURAL JOIN veterinarian_office.animal
+                                             ORDER BY pet_name, appointment_date DESC""")
+        curr_vet=0
+        vet_name = 'All'
+    else:
+        appointments = pg.execute_read_query(f"""SELECT * FROM veterinarian_office.appointment
                                              NATURAL JOIN veterinarian_office.animal
                                              WHERE vet_id={curr_vet}
                                              ORDER BY pet_name, appointment_date DESC""")
-    vet_name = pg.execute_read_query(f"""SELECT vet_name
-                                         FROM veterinarian_office.vet
-                                         WHERE vet_id='{curr_vet}'""")
+        vet_name = pg.execute_read_query(f"""SELECT vet_name
+                                             FROM veterinarian_office.vet
+                                             WHERE vet_id='{curr_vet}'""")[0][0]
     return render_template('appointment.html', vets=vets, appointments=appointments,
-                           curr_vet=vet_name[0][0])
+                           curr_vet=vet_name)

@@ -6,12 +6,9 @@
 {% block content %}
 <form action="/aggregate" method="POST">
 	<select name="species">
+		<option value=0{% if curr_species == 0 %} selected{% endif %}>All</option type="submit">
 		{% for s in species %}
-		{% if curr_species == s %}
-		<option value={{s}} selected>{{s}}</option type="submit">
-		{% else %}
-		<option value={{s}}>{{s}}</option type="submit">
-		{% endif %}
+		<option value={{s}}{% if curr_species == s %} selected{% endif %}>{{s}}</option type="submit">
 		{% endfor %}
 		<input type="submit" value="Select Species">
 	</select>

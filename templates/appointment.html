@@ -6,19 +6,16 @@
 {% block content %}
 <form action="/appointment" method="POST">
 	<select name="vet">
+		<option value=0{% if curr_vet == 'All' %} selected{% endif %}>All</option type="submit">
 		{% for v in vets %}
-		{% if curr_vet == v.vet_name %}
-		<option value={{v.vet_id}} selected>{{v.vet_name}}</option type="submit">
-		{% else %}
-		<option value={{v.vet_id}}>{{v.vet_name}}</option type="submit">
-		{% endif %}
+		<option value={{v.vet_id}}{% if curr_vet == v.vet_name %} selected{% endif %}>{{v.vet_name}}</option type="submit">
 		{% endfor %}
 		<input type="submit" value="Select Veterinarian">
 	</select>
 </form>
 
 <div class="card bg-light p-3">
-	<div id=table-caption><strong>Patients shown for:</strong><br/>Dr. {{curr_vet}}</div>
+	<div id=table-caption><strong>Patients shown for:</strong><br/>{% if curr_vet != 'All' %}Dr. {% endif %}{{curr_vet}}</div>
 	<table data-toolbar="#table-caption" data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
