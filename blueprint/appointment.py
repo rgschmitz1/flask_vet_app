@@ -24,14 +24,11 @@ def appointment_info():
     if curr_vet is None:
         curr_vet = str(vets[0][0])
     appointments = pg.execute_read_query(f"""SELECT * FROM veterinarian_office.appointment
-                                         NATURAL JOIN veterinarian_office.animal
-                                         WHERE vet_id={curr_vet} ORDER BY pet_name, appointment_date DESC""")
-
-    # Check for current vet name in vets
-    for vet in vets:
-        if (str(vet['vet_id']) == str(curr_vet)):
-            curr_vet = vet['vet_name']
-            break
-
+                                             NATURAL JOIN veterinarian_office.animal
+                                             WHERE vet_id={curr_vet}
+                                             ORDER BY pet_name, appointment_date DESC""")
+    vet_name = pg.execute_read_query(f"""SELECT vet_name
+                                         FROM veterinarian_office.vet
+                                         WHERE vet_id='{curr_vet}'""")
     return render_template('appointment.html', vets=vets, appointments=appointments,
-                           curr_vet=curr_vet)
+                           curr_vet=vet_name[0][0])
