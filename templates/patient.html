@@ -63,7 +63,7 @@
 </div>
 
 <div class="card bg-light p-3">
-	<table data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
+	<table id="table" data-toggle="table" data-show-pagination-switch="true" data-pagination="true" data-search="true" data-classes="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
 				<th data-sortable="true" data-field="id">ID</th>
@@ -73,11 +73,12 @@
 				<th data-sortable="true" data-field="sex">Sex</th>
 				<th data-sortable="true" data-field="breed">Breed</th>
 				<th data-sortable="true" data-field="color">Color</th>
+				<th data-events="actionEvents">Operation</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for animal in animals %}
-			<tr>
+			<tr id="{{ animal['pet_id'] }}">
 				<td><a href="/patient/{{ animal['pet_id'] }}">{{ animal['pet_id'] }}</a></td>
 				<td>{{ animal['pet_name'] }}</td>
 				<td>{{ animal['pet_birthdate'] }}</td>
@@ -85,6 +86,7 @@
 				<td>{{ animal['pet_sex'] }}</td>
 				<td>{{ animal['breed'] }}</td>
 				<td>{{ animal['color'] }}</td>
+				<td class="text-center"><a class="remove" href="javascript:void(0)" onclick="removeMe({{ animal['pet_id'] }})" title="Remove"><i class="fa fa-trash"></i></a></td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -94,4 +96,6 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.20.1/dist/bootstrap-table.min.js"></script>
+<script src="https://kit.fontawesome.com/3bd96ec630.js" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/remove_patient.js') }}"></script>
 {% endblock %}

@@ -16,16 +16,22 @@ from postgres import postgres
 patient = Blueprint('patient', __name__)
 
 @patient.route('/patient', methods=["GET", "POST"])
-@patient.route('/patient/<pet_id>', methods=["GET", "POST"])
+@patient.route('/patient/<pet_id>', methods=["GET", "DELETE"])
 def patient_info(pet_id=None):
     """ This function adds new patients along with displaying all patients records
 
     input id: optional numeric patient id to display detailed paitient records
     """
     pg = postgres()
+    if pet_id and request.method == "DELETE":
+        query = f"DELETE FROM veterinarian_office.animal WHERE pet_id = '{pet_id}'"
+        if pg.execute_query(query):
+            flash('Successfully deleted patient from database.')
+        else:
+            flash('ERROR: Failed to delete patient from database.')
     # Detailed patient records view. This is conditional -- only executes
     # when a patient ID is passed in with the URI.
-    if pet_id:
+    if pet_id and request.method != "DELETE":
         animals = pg.execute_read_query(f"SELECT * FROM veterinarian_office.animal WHERE pet_id = '{pet_id}'")
         allergies = pg.execute_read_query(f"SELECT allergy FROM veterinarian_office.allergy WHERE pet_id = '{pet_id}'")
         conditions = pg.execute_read_query(f"SELECT medical_condition, is_active FROM veterinarian_office.condition WHERE pet_id = '{pet_id}'")
