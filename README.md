@@ -1,6 +1,17 @@
 # Setup
 Code was tested using Python 3.10.4 using Windows 10 and Ubuntu 20.04
 
+Create a .env file containing the following info
+```
+FLASK_ENV=development
+SECRET_KEY=<insert_key>
+POSTGRES_HOST=<hostname>
+POSTGRES_PORT=5432
+POSTGRES_DB=postgres
+POSTGRES_PASS=<password>
+POSTGRES_USER=postgres
+```
+
 Create a virtual environment and install required packages using the following commands
 ```
 python -m venv venv
